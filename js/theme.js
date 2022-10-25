@@ -1,3 +1,11 @@
+/*
+================================================================
+* Template:  	 Simone - Personal Portfolio Template
+* Written by: 	 Harnish Design - (http://www.harnishdesign.net)
+* Description:   Main Custom Script File
+================================================================
+*/
+
 (function($) {
     "use strict";
 
@@ -116,6 +124,96 @@
     });
 
     /*------------------------------------
+        Magnific Popup
+    -------------------------------------- */
+    // Image on Modal
+    $('.popup-img-gallery').each(function() {
+        $(this).magnificPopup({
+            delegate: '.popup-img:visible',
+            type: "image",
+            tLoading: '<div class="preloader"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>',
+            closeOnContentClick: !0,
+            mainClass: "mfp-fade",
+            gallery: {
+                enabled: true,
+                navigateByImgClick: true,
+                preload: [0, 1]
+            },
+        });
+    });
+
+    // Ajax On Modal 
+    $('.popup-ajax-gallery').each(function() {
+        $(this).magnificPopup({
+            delegate: '.popup-ajax:visible',
+            type: "ajax",
+            tLoading: '<div class="preloader"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>',
+            mainClass: "mfp-fade",
+            closeBtnInside: true,
+            midClick: true,
+            gallery: {
+                enabled: true,
+            },
+            callbacks: {
+                ajaxContentAdded: function() {
+                    $(".owl-carousel").each(function(index) {
+                        var a = $(this);
+                        if ($("html").attr("dir") == 'rtl') {
+                            var rtlVal = true
+                        } else {
+                            var rtlVal = false
+                        }
+                        $(this).owlCarousel({
+                            rtl: rtlVal,
+                            autoplay: a.data('autoplay'),
+                            center: a.data('center'),
+                            autoplayTimeout: a.data('autoplaytimeout'),
+                            autoplayHoverPause: a.data('autoplayhoverpause'),
+                            loop: a.data('loop'),
+                            speed: a.data('speed'),
+                            nav: a.data('nav'),
+                            dots: a.data('dots'),
+                            autoHeight: a.data('autoheight'),
+                            autoWidth: a.data('autowidth'),
+                            margin: a.data('margin'),
+                            stagePadding: a.data('stagepadding'),
+                            slideBy: a.data('slideby'),
+                            lazyLoad: a.data('lazyload'),
+                            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
+                            animateOut: a.data('animateOut'),
+                            animateIn: a.data('animateIn'),
+                            video: a.data('video'),
+                            items: a.data('items'),
+                            responsive: {
+                                0: {
+                                    items: a.data('items-xs'),
+                                },
+                                576: {
+                                    items: a.data('items-sm'),
+                                },
+                                768: {
+                                    items: a.data('items-md'),
+                                },
+                                992: {
+                                    items: a.data('items-lg'),
+                                }
+                            }
+                        });
+                    });
+                }
+            }
+        });
+    });
+
+    // YouTube/Viemo Video & Gmaps
+    $('.popup-youtube, .popup-vimeo, .popup-gmaps').each(function() {
+        $(this).magnificPopup({
+            type: 'iframe',
+            mainClass: 'mfp-fade',
+        });
+    });
+
+    /*------------------------------------
         Isotope Portfolio Filter
     -------------------------------------- */
     $(window).on('load', function() {
@@ -152,9 +250,19 @@
     });
 
     /*------------------------------------
+        Counter
+    -------------------------------------- */
+    $(".counter").each(function() {
+        $(this).appear(function() {
+            $(this).countTo({
+                speed: 1800,
+            });
+        });
+    });
+
+    /*------------------------------------
         Typed
     -------------------------------------- */
-
     $(".typed").each(function() {
         var typed = new Typed('.typed', {
             stringsElement: '.typed-strings',
@@ -166,22 +274,11 @@
     });
 
     /*------------------------------------
-        WOW animation
+        YTPlayer YouTube Background
     -------------------------------------- */
 
-    $(window).on('load', function() {
-        $(".wow").each(function() {
-            if ($(window).width() > 767) {
-                var wow = new WOW({
-                    boxClass: 'wow',
-                    animateClass: 'animated',
-                    offset: 0,
-                    mobile: false,
-                    live: true
-                });
-                new WOW().init();
-            }
-        });
+    $(".player").each(function() {
+        $(this).mb_YTPlayer();
     });
 
     /*------------------------
@@ -203,12 +300,23 @@
                 $('#back-to-top').fadeOut();
             }
         });
+        $('#back-to-top').on("click", function() {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 'slow');
+            return false;
+        });
     });
-    $('#back-to-top').on("click", function() {
-        $('html, body').animate({
-            scrollTop: 0
-        }, 'slow');
-        return false;
+
+    /*------------------------------------
+    Counter
+    -------------------------------------- */
+    $(".counter").each(function () {
+        $(this).appear(function () {
+            $(this).countTo({
+                speed: 1800,
+            });
+        });
     });
 
     var form = document.getElementById("contact-form");
@@ -266,5 +374,12 @@
     }
 
     form.addEventListener("submit", handleSubmit);
+
+    $('.navbar-toggler').on('click', function() {
+        $('#header-subnav').toggleClass('show');
+    });
+    $(".navbar-nav a").on('click', function() {
+        $(".navbar-collapse, .navbar-toggler").removeClass("show");
+    });
 
 })(jQuery)
