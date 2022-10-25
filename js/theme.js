@@ -222,4 +222,23 @@
         $(".navbar-collapse, .navbar-toggler").removeClass("show");
     });
 
+    $('.navbar-toggler').on('click', function () {
+        $('#header-nav2').toggleClass('show');
+        if ($('#header-nav2').hasClass('show')) {
+            $('.navbar-toggler1').removeClass('show').hide();
+            $('.navbar-toggler2').addClass('show').show();
+        } else {
+            $('.navbar-toggler1').removeClass('show').show();
+            $('.navbar-toggler2').removeClass('show').hide();
+        }
+        $('#header-nav2 .navbar-collapse').css('opacity', '1 !important');
+        $('#header-nav2 .navbar-collapse').css('visibility', 'visible');
+        $('#header-nav2 .navbar-collapse').css('background', 'rgba(0, 0, 0, 0.95');
+    });
+
+    $(".navbar-nav a").on('click', function () {
+        $(".navbar-collapse, .navbar-toggler").removeClass("show");
+    });
+
+    document.querySelector('a[data-replace="phone-link"]').href = 'tel:+34' + parseInt("27AC5920",16);
 })(jQuery)
