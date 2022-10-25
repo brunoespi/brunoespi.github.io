@@ -1,23 +1,12 @@
-/*
-================================================================
-* Template:  	 Simone - Personal Portfolio Template
-* Written by: 	 Harnish Design - (http://www.harnishdesign.net)
-* Description:   Main Custom Script File
-================================================================
-*/
-
 (function($) {
     "use strict";
 
-    // Preloader
     $(window).on('load', function() {
         $('.lds-ellipsis').fadeOut(); // will first fade out the loading animation
         $('.preloader').delay(333).fadeOut('slow'); // will fade out the white DIV that covers the website.
         $('body').delay(333);
     });
 
-
-    // Header Sticky
     $(window).on('scroll', function() {
         var stickytop = $('#header.sticky-top .bg-transparent');
         var stickytopslide = $('#header.sticky-top-slide');
@@ -39,7 +28,6 @@
         }
     });
 
-    // Sections Scroll
     if ($("body").hasClass("side-header")) {
         $('.smooth-scroll').on('click', function() {
             event.preventDefault();
@@ -58,7 +46,6 @@
         });
     }
 
-    // Mobile Menu
     $('.navbar-toggler').on('click', function() {
         $(this).toggleClass('show');
     });
@@ -66,7 +53,6 @@
         $(".navbar-collapse, .navbar-toggler").removeClass("show");
     });
 
-    // Overlay Menu & Side Open Menu
     $('.navbar-side-open .collapse, .navbar-overlay .collapse').on('show.bs.collapse hide.bs.collapse', function(e) {
             e.preventDefault();
         }),
@@ -75,9 +61,6 @@
             $($(this).data('bs-target')).toggleClass('show');
         })
 
-    /*---------------------------------
-       Carousel (Owl Carousel)
-    ----------------------------------- */
     $(".owl-carousel").each(function(index) {
         var a = $(this);
         if ($("html").attr("dir") == 'rtl') {
@@ -123,135 +106,12 @@
         });
     });
 
-    /*------------------------------------
-        Magnific Popup
-    -------------------------------------- */
-    // Image on Modal
-    $('.popup-img-gallery').each(function() {
-        $(this).magnificPopup({
-            delegate: '.popup-img:visible',
-            type: "image",
-            tLoading: '<div class="preloader"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>',
-            closeOnContentClick: !0,
-            mainClass: "mfp-fade",
-            gallery: {
-                enabled: true,
-                navigateByImgClick: true,
-                preload: [0, 1]
-            },
-        });
-    });
-
-    // Ajax On Modal 
-    $('.popup-ajax-gallery').each(function() {
-        $(this).magnificPopup({
-            delegate: '.popup-ajax:visible',
-            type: "ajax",
-            tLoading: '<div class="preloader"><div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>',
-            mainClass: "mfp-fade",
-            closeBtnInside: true,
-            midClick: true,
-            gallery: {
-                enabled: true,
-            },
-            callbacks: {
-                ajaxContentAdded: function() {
-                    $(".owl-carousel").each(function(index) {
-                        var a = $(this);
-                        if ($("html").attr("dir") == 'rtl') {
-                            var rtlVal = true
-                        } else {
-                            var rtlVal = false
-                        }
-                        $(this).owlCarousel({
-                            rtl: rtlVal,
-                            autoplay: a.data('autoplay'),
-                            center: a.data('center'),
-                            autoplayTimeout: a.data('autoplaytimeout'),
-                            autoplayHoverPause: a.data('autoplayhoverpause'),
-                            loop: a.data('loop'),
-                            speed: a.data('speed'),
-                            nav: a.data('nav'),
-                            dots: a.data('dots'),
-                            autoHeight: a.data('autoheight'),
-                            autoWidth: a.data('autowidth'),
-                            margin: a.data('margin'),
-                            stagePadding: a.data('stagepadding'),
-                            slideBy: a.data('slideby'),
-                            lazyLoad: a.data('lazyload'),
-                            navText: ['<i class="fa fa-chevron-left"></i>', '<i class="fa fa-chevron-right"></i>'],
-                            animateOut: a.data('animateOut'),
-                            animateIn: a.data('animateIn'),
-                            video: a.data('video'),
-                            items: a.data('items'),
-                            responsive: {
-                                0: {
-                                    items: a.data('items-xs'),
-                                },
-                                576: {
-                                    items: a.data('items-sm'),
-                                },
-                                768: {
-                                    items: a.data('items-md'),
-                                },
-                                992: {
-                                    items: a.data('items-lg'),
-                                }
-                            }
-                        });
-                    });
-                }
-            }
-        });
-    });
-
-    // YouTube/Viemo Video & Gmaps
-    $('.popup-youtube, .popup-vimeo, .popup-gmaps').each(function() {
-        $(this).magnificPopup({
-            type: 'iframe',
-            mainClass: 'mfp-fade',
-        });
-    });
-
-    /*------------------------------------
-        Isotope Portfolio Filter
-    -------------------------------------- */
-    $(window).on('load', function() {
-        $(".portfolio-filter").each(function() {
-            var e = $(this);
-            e.imagesLoaded(function() {
-                if ($("html").attr("dir") == 'rtl') {
-                    var rtlVal = false
-                } else {
-                    var rtlVal = true;
-                }
-                var $grid = e.isotope({
-                    layoutMode: "masonry",
-                    originLeft: rtlVal
-                });
-                $(".portfolio-menu").find("a").on("click", function() {
-                    var filterValue = $(this).attr("data-filter");
-                    return $(".portfolio-menu").find("a").removeClass("active"), $(this).addClass("active"),
-                        $grid.isotope({
-                            filter: filterValue
-                        }), !1
-                });
-            });
-        });
-    });
-
-    /*------------------------------------
-        Parallax Background
-    -------------------------------------- */
     $(".parallax").each(function() {
         $(this).parallaxie({
             speed: 0.5,
         });
     });
 
-    /*------------------------------------
-        Counter
-    -------------------------------------- */
     $(".counter").each(function() {
         $(this).appear(function() {
             $(this).countTo({
@@ -260,9 +120,6 @@
         });
     });
 
-    /*------------------------------------
-        Typed
-    -------------------------------------- */
     $(".typed").each(function() {
         var typed = new Typed('.typed', {
             stringsElement: '.typed-strings',
@@ -273,25 +130,11 @@
         });
     });
 
-    /*------------------------------------
-        YTPlayer YouTube Background
-    -------------------------------------- */
-
-    $(".player").each(function() {
-        $(this).mb_YTPlayer();
-    });
-
-    /*------------------------
-       tooltips
-    -------------------------- */
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
     var tooltipList = tooltipTriggerList.map(function(tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 
-    /*------------------------
-       Scroll to top
-    -------------------------- */
     $(function() {
         $(window).on('scroll', function() {
             if ($(this).scrollTop() > 400) {
@@ -308,9 +151,6 @@
         });
     });
 
-    /*------------------------------------
-    Counter
-    -------------------------------------- */
     $(".counter").each(function () {
         $(this).appear(function () {
             $(this).countTo({
